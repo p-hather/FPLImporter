@@ -24,19 +24,21 @@ class bigQueryLoad:
             return False
     
     def create_dataset(self):
+        logging.info(f'Attempting to create dataset `{self.dataset_id}`')
         dataset_obj = bigquery.Dataset(self.dataset_id)
         dataset_obj.location = self.dataset_location
 
         try:
             self.bq.create_dataset(dataset_obj, timeout=30)
-            logging.info(f'Created dataset `{self.dataset_id}`')
+            logging.info(f'Success - dataset created')
         except exceptions.Conflict:
-            logging.info(f'Dataset `{self.dataset_id}` already exists')
+            logging.info(f'Dataset already exists')
 
     def create_table_id(self, table):
         return '.'.join([self.dataset_id, table])
     
     def load_table(self, data, table_id, add_loaded_ts=True, description=None):
+        logging.info(f'Attempting to load records into `{table_id}`')
         job_config = bigquery.LoadJobConfig(
             autodetect=True, source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON)
         
@@ -49,6 +51,7 @@ class bigQueryLoad:
             for obj in data: obj["loaded_ts"] = loaded_ts
 
         self.bq.load_table_from_json(data, table_id, job_config=job_config)
+        logging.info(f'Success - {len(data)} records loaded')
 
         if description:
             table = self.bq.get_table(table_id)
