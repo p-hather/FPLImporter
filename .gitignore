@@ -1,0 +1,13 @@
+# Environment
+venv/
+__pycache__/
+.python-version
+
+# Development
+dev/
+
+# Secrets
+secrets/
+
+# Logging
+*.log
