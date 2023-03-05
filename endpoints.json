@@ -1,0 +1,14 @@
+[
+    {
+        "name": "bootstrap-static",
+        "path": "/bootstrap-static",
+        "schema_path": "schemas/bootstrap-static.json",
+        "description": "This endpoint returns general information about the FPL game divided into events (basic information of every Gameweek such as average score, highest score, top scoring player, most captained, etc.), game_settings (the game settings and rules), phases (phases of FPL season), teams (basic information of current Premier League clubs), total_players (total FPL players), elements (information of all Premier League players including points, status, value, match stats  - goals, assists, etc.), element_types (basic information about player's position - GK, DEF, MID, FWD)"
+    },
+    {
+        "name": "fixtures",
+        "path": "/fixtures",
+        "schema_path": "schemas/fixtures.json",
+        "description": "Fixtures for every gameweek of the season"
+    }
+]
