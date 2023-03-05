@@ -56,3 +56,4 @@ class bigQueryLoad:
         if description:
             table = self.bq.get_table(table_id)
             table.description = description
+            self.bq.update_table(table, ["description"])
