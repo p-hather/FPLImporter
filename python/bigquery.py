@@ -36,7 +36,7 @@ class bigQueryLoad:
     def create_table_id(self, table):
         return '.'.join([self.dataset_id, table])
     
-    def load_table(self, data, table_id, add_loaded_ts=True):
+    def load_table(self, data, table_id, add_loaded_ts=True, description=None):
         job_config = bigquery.LoadJobConfig(
             autodetect=True, source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON)
         
@@ -49,3 +49,7 @@ class bigQueryLoad:
             for obj in data: obj["loaded_ts"] = loaded_ts
 
         self.bq.load_table_from_json(data, table_id, job_config=job_config)
+
+        if description:
+            table = self.bq.get_table(table_id)
+            table.description = description
