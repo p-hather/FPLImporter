@@ -1,4 +1,4 @@
-import json
+import yaml
 import requests
 import os
 import logging
@@ -14,7 +14,7 @@ load_dotenv(env_path)
 
 
 class FPLImporter:
-    def __init__(self, bq_project, bq_dataset, endpoint_fp='endpoints.json') -> None:
+    def __init__(self, bq_project, bq_dataset, endpoint_fp='endpoints.yaml') -> None:
         self.base_url = 'https://fantasy.premierleague.com/api'
         self.endpoint_fp = endpoint_fp
         self.endpoints = self.get_endpoints(self.endpoint_fp)
@@ -25,7 +25,7 @@ class FPLImporter:
 
     def get_endpoints(self, fp) -> dict:
         with open(fp) as endpoints_file:
-            return json.load(endpoints_file)
+            return yaml.safe_load(endpoints_file)
     
     def import_data(self) -> None:
         for endpoint in self.endpoints:
