@@ -29,12 +29,11 @@ class FPLImporter:
     
     def import_data(self) -> None:
         for endpoint in self.endpoints:
-            name = endpoint["name"]
             url = f'{self.base_url}/{endpoint["path"]}/'
             data = requests.get(url).json()
 
-            table_id = self.bq.create_table_id(name)
-            self.bq.load_table(data, table_id)
+            table_id = self.bq.create_table_id(endpoint["name"])
+            self.bq.load_table(data, table_id, description=endpoint["description"])
     
     def run_process(self) -> None:
         if not self.bq.check_dataset_exists():
