@@ -6,8 +6,10 @@ __pycache__/
 # Development
 dev/
 
-# Secrets
+# Secrets/config
 secrets/
+config.yaml
+!example-key.json
 
 # Logging
 *.log

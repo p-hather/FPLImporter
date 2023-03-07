@@ -1,0 +1,6 @@
+bigquery:
+  project: project-123
+  dataset: fpl
+team:
+  team_ids: []
+  league_id: 123456
