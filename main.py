@@ -1,15 +1,11 @@
 import yaml
 import requests
 import logging
-from dotenv import load_dotenv
 from python.bigquery import bigQueryLoad
 
 
 logging.basicConfig(level=logging.INFO, filename="FPLImporter.log", filemode="a+",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
-
-env_path = 'secrets/.env'
-load_dotenv(env_path)
 
 
 class FPLImporter:
