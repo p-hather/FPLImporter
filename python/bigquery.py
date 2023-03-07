@@ -37,6 +37,12 @@ class bigQueryLoad:
     def create_table_id(self, table):
         return '.'.join([self.dataset_id, table])
     
+    def update_table_description(self, table_id, description):
+        logging.info(f'Attempting to update the description for `{table_id}`')
+        table = self.bq.get_table(table_id)
+        table.description = description
+        self.bq.update_table(table, ["description"])
+
     def load_table(self, data, table_id, add_loaded_ts=True, description=None):
         logging.info(f'Attempting to load records into `{table_id}`')
         job_config = bigquery.LoadJobConfig(
@@ -50,10 +56,9 @@ class bigQueryLoad:
             loaded_ts = datetime.now().strftime('%Y-%m-%dT%XZ')
             for obj in data: obj["loaded_ts"] = loaded_ts
 
-        self.bq.load_table_from_json(data, table_id, job_config=job_config)
+        job = self.bq.load_table_from_json(data, table_id, job_config=job_config)
+        job.result()  # Wait for the job to complete
         logging.info(f'Success - {len(data)} records loaded')
 
         if description:
-            table = self.bq.get_table(table_id)
-            table.description = description
-            self.bq.update_table(table, ["description"])
+            self.update_table_description(table_id, description)
