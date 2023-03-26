@@ -15,6 +15,11 @@ fixtures:
   path: /fixtures
   description: >
     Fixtures for every gameweek of the season
+team:
+  type: team
+  path: entry/%TEAM_ID%
+  description: >
+    Basic information about a manager's team - name, favourite team, region, etc.
 team-history:
   type: team
   path: entry/%TEAM_ID%/history
