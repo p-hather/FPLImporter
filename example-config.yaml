@@ -1,6 +1,7 @@
+fpl:
+  team_ids:
+    - 1234
+    - 5678
 bigquery:
   project: project-123
   dataset: fpl
-team:
-  team_ids: []
-  league_id: 123456
