@@ -5,7 +5,7 @@
 
 Import data from the Fantasy Premier League API into Google BigQuery, with just a few lines of config.
 
-This repository is written to be dynamic - it's a proof of concept that can be adapted for other REST APIs.
+NB this repository is intended as a proof of concept - it's not a finished product and needs further development. That said - it does work and has the potential for adaptation to other use cases.
 
 ### Set up
 
