@@ -42,6 +42,7 @@ class bigQueryLoad:
         table = self.bq.get_table(table_id)
         table.description = description
         self.bq.update_table(table, ["description"])
+        logging.info('Success - description updated')
 
     def load_table(self, data, table_id, add_loaded_ts=True, description=None):
         logging.info(f'Attempting to load records into `{table_id}`')
